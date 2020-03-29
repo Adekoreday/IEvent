@@ -4,8 +4,8 @@ export default (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     isPremium:  DataTypes.BOOLEAN,
     location: DataTypes.STRING,
-    date: DataTypes.date,
-    deadline: DataTypes.date
+    date: DataTypes.DATE,
+    deadline: DataTypes.DATE
   }, {});
   Events.associate = function(models) {
     Events.belongsToMany(models.User, {

@@ -8,6 +8,7 @@ export default {
         lastname: 'Adekorede',
         email: 'adekorede@mailinator.com',
         password: bcrypt.hashSync('password@5', 10),
+        isPremium: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -16,6 +17,7 @@ export default {
         lastname: 'korede',
         email: 'ade@mailinator.com',
         password: bcrypt.hashSync('password@5', 10),
+        isPremium: false,
         createdAt: new Date(),
         updatedAt: new Date()
       }

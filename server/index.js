@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 import Debug from 'debug';
 import swaggerUi from'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-
+import routes from './routes';
 config();
 
 const debug = Debug('dev');
@@ -49,6 +49,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.get('/', (request, response) => {
   response.status(200).send('Welcome to Events app');
 });
+
+app.use('/api/v1', routes);
 
 app.use('*', (request, response) => {
   response.status(404).send('Not Found');
