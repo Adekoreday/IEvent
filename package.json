@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set DEBUG=dev & node dist/index.js",
+    "start": "node dist/index.js",
     "start:dev": "set DEBUG=dev  & nodemon --exec babel-node ./server/index.js",
     "build": "babel server --out-dir dist",
     "db:migrate": "sequelize db:migrate",
