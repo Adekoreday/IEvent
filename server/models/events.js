@@ -13,7 +13,9 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'eventsId',
       otherKey: 'userId',
       through: 'UserEvents',
-      as: 'events'
+      as: 'users',
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     });
   };
 
