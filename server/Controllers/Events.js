@@ -118,6 +118,32 @@ class Event {
       return serverError(response);
     }
   }
+
+         /**
+   * Method for handling read event route(get api/v1/events/read)
+   * @param {object} request - the request object
+   * @param {object} response  - object
+   * @return { json }  - the response json
+   */
+  static async subscribedEvents(request, response) {
+    try {
+        const id = request.params.id;
+        const event = await Events.findById(id);
+        if(event === null) return serverResponse(response, 404, { message: 'event not found'});
+        const user = request.user;
+        const result = await User.findOne({
+            where: {id : user.id},
+            include: [
+                {model: Events, as: 'events'} ]
+            }
+        );
+      return serverResponse(response, 200, {
+        data: { ...result.dataValues }
+      });
+    } catch (error) {
+      return serverError(response);
+    }
+  }
 }
 
 export default Event;

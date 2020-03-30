@@ -8,4 +8,5 @@ route.post('/create', verifyToken, EventsValidator.EventAddValidation(), Event.c
 route.get('/readall', verifyToken, Event.readAll);
 route.get('/read/:id', verifyToken, Event.read);
 route.get('/subscribe/:id', verifyToken, Event.subscribe);
+route.get('/subscribed/:id', verifyToken, Event.subscribedEvents);
 export default route;
