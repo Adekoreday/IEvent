@@ -30,17 +30,14 @@ class Users {
             error: 'email has already been taken'
           });
         }
-        console.log('i got here!!!1');
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = await User.create({
           ...req.body,
           password: hashedPassword
         });
-        console.log('i got here!!!2');
         const { id } = user;
         delete user.password;
         const token = generateToken({ id }, '24h');
-        console.log('i got here!!!3');
         res.set('Authorization', token);
         return serverResponse(res, 201, {token, ...user.dataValues});
       } catch (error) {
@@ -62,7 +59,7 @@ class Users {
       let verifyPassword;
       if (user) { verifyPassword = bcrypt.compareSync(password, user.password); }
       if (!user || !verifyPassword) {
-        return responseMessage(response, 401, { message: 'username or password is incorrect' });
+        return serverResponse(response, 401, { message: 'username or password is incorrect' });
       }
       const { id, dataValues } = user;
 
@@ -73,7 +70,6 @@ class Users {
         token
       });
     } catch (error) {
-
       return serverError(response);
 
     }

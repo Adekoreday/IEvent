@@ -17,6 +17,9 @@ module.exports = {
       isPremium: {
         type: Sequelize.BOOLEAN
       },
+      imageUrl: {
+       type: Sequelize.STRING
+      },
       location: {
         type: Sequelize.STRING
       },

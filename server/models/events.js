@@ -4,6 +4,7 @@ export default (sequelize, DataTypes) => {
     category: DataTypes.STRING,
     isPremium:  DataTypes.BOOLEAN,
     location: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
     date: DataTypes.DATE,
     deadline: DataTypes.DATE
   }, {});
@@ -14,6 +15,17 @@ export default (sequelize, DataTypes) => {
       through: 'UserEvents',
       as: 'events'
     });
+  };
+
+  Events.findByCategory = async (category) => {
+    const event = await Events.findAll({ where: { category } });
+    if (event) return event;
+    return null;
+  };
+  Events.findById = async (id) => {
+    const event = await Events.findOne({ where: { id } });
+    if (event) return event.dataValues;
+    return null;
   };
   return Events;
 };
