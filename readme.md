@@ -12,7 +12,7 @@ A REST API BACKEND BUILT WITH NODE.JS, EXPRESS AND SEQUELIZE
 
 Api docs on Postman collection
 
-[POSTMAN](https://documenter.getpostman.com/view/5907608/SzYXXKJZ?version=latest)
+[POSTMAN](https://documenter.getpostman.com/view/5907608/SzYXXKJZ)
 
 by Adeyemi Adekorede
 twitter @AdeyemiAdekore2
