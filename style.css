@@ -25,9 +25,18 @@
   object-fit: cover;
 }
 
+.btn__primary{
+  display: inline-block;
+  border: 1px solid grey;
+  padding: .5rem;
+  cursor: pointer;
+}
+
 .header{
   font-family: 'Lato', sans-serif;
   margin: 1rem 5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .subcategory{
@@ -39,7 +48,7 @@
 }
 
 .event__list{
-  border: 1px solid grey;
+  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.10);
   margin: 2rem 5rem;
   width: 25rem;
   height: 40%;
