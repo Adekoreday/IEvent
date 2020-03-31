@@ -5,6 +5,7 @@ import Debug from 'debug';
 import swaggerUi from'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import routes from './routes';
+import cors from 'cors';
 config();
 
 const debug = Debug('dev');
@@ -32,6 +33,7 @@ const options = {
 const specs = swaggerJsdoc(options);
 
 const app = express();
+app.use(cors())
 app.use(logger('dev'));
 app.use(json());
 app.use(urlencoded({ extended: false, }));
