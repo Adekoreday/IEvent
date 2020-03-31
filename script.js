@@ -2,12 +2,39 @@ $("#login-btn").click(function(){
     console.log('i was clicked');
     $(".signup__form").hide();
     $(".login__form").show();
+    $(".modal-title").html('Log In');
   });
+
+  $('#login').submit(function( event ) {
+    event.preventDefault();
+    var emailval = $(".email_login").val();
+    var passwordval = $(".password_login").val();
+    $('.login_submit').html('loading..');
+    $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/signin",
+    method: 'POST',
+    data: {
+        email: emailval,
+        password: passwordval
+    },
+     success: function(response){
+        $("#login-btn").remove();
+        $("#signup-btn").remove();
+         $('#exampleModal').modal('hide');
+         alert('login successful');
+         localStorage.setItem('token', response.token)
+     },
+     error:function(response) {
+        $('.login_submit').html('submit');
+        alert('wrong user name or password');
+     }
+  });
+  })
 
   $("#signup-btn").click(function(){
     console.log('i was clicked');
     $(".login__form").hide();
     $(".signup__form").show();
+    $(".modal-title").html('Sign Up');
   });
 
   $(document).ready(function(){
