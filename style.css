@@ -1,11 +1,10 @@
 /* Add your css styles here. Plagiarism will NOT be tolerated! */
-.container{
+.container__section{
     height: 50%;
     width: auto;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);  
-    margin: 1rem 5rem 0rem 5rem;
     position: relative;
-
+    
 }
 
 .container__sub{
@@ -40,7 +39,6 @@
 }
 
 .subcategory{
-  margin: 0rem 5rem;
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-around;
@@ -48,11 +46,10 @@
 }
 
 .event__list{
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.10);
-  margin: 2rem 5rem;
-  width: 25rem;
-  height: 40%;
-
+  margin: 7rem 0;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
 }
 .sub__card{
   box-sizing: border-box;
@@ -62,6 +59,11 @@
 .content{
   height: 80%;
   background-color: red;
+}
+
+.all__events{
+  display: flex;
+  justify-content: space-around;
 }
 
 .subcategory{
