@@ -12,10 +12,13 @@ $("#login-btn").click(function(){
     $('.login_submit').html('loading..');
     $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/signin",
     method: 'POST',
-    data: {
+    headers: {
+        "Content-Type": "application/json"
+    },
+    data: JSON.stringify({
         email: emailval,
         password: passwordval
-    },
+    }),
      success: function(response){
         $("#login-btn").addClass('none');
         $("#signup-btn").addClass('none');
@@ -27,6 +30,48 @@ $("#login-btn").click(function(){
         $('.login_submit').html('submit');
         $("#login-btn").removeClass('none');
         $("#signup-btn").removeClass('none');
+        alert('wrong user name or password');
+     }
+  });
+  })
+
+  $('#signUp').submit(function( event ) {
+    event.preventDefault();
+    $('.login_submit').html('loading..');
+    var firstnameVal = $(".firstname_signup").val();
+    var lastnameVal = $(".lastname_signup").val();
+    var emailval = $(".email_signup").val();
+    var passwordval = $(".password_signup").val();
+    var checboxval = $(".form-check-input").is(':checked') ? true : false;
+    console.log(checboxval, "the checkbox val");
+
+    $('.signup_submit').html('loading..');
+    $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/signup",
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    data: JSON.stringify({
+        firstname: firstnameVal,
+        lastname: lastnameVal,
+        email: emailval,
+        password: passwordval,
+        isPremium: checboxval
+        }),
+     success: function(response){
+        $("#login-btn").addClass('none');
+        $("#signup-btn").addClass('none');
+         $('#exampleModal').modal('hide');
+         $('.signup-btn').html('sign up');
+         alert('signup successful');
+         localStorage.setItem('token', response.token)
+     },
+     error:function(response) {
+        $('.login_submit').html('submit');
+        $('.signup-btn').html('sign up');
+        $("#login-btn").removeClass('none');
+        $("#signup-btn").removeClass('none');
+        console.log('this is the response', response);
         alert('wrong user name or password');
      }
   });
