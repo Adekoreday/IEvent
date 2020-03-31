@@ -40,10 +40,12 @@ $("#login-btn").click(function(){
   });
 
   $(document).ready(function(){
+      $(".loader").html('Loading....');
     $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/events/readall",
            method: 'GET',
             success: function(response){
                console.log(response);
+               $(".loader").html('');
              Object.keys(response.data).forEach(function(element, i) {
                 var item = document.createElement('div');
                 item.className = 'card';
@@ -73,8 +75,8 @@ $("#login-btn").click(function(){
                 location.innerHTML = response.data[element].location;
                 date.innerHTML= new Date(response.data[element].date).toString().slice(0, 15);
                 
-                var button =document.createElement('a');
-                button.className='btn btn-primary';
+                var button =document.createElement('div');
+                button.className='btn btn-primary book__event';
                 button.innerHTML='Book Event';
                 button.style.color='#FFFFFF';
                 button.style.marginTop = '10px';
@@ -90,28 +92,57 @@ $("#login-btn").click(function(){
                 $('.event__list').append(item);
 
                });
-            }});
+            },
+            error:function(response) {
+                $(".loader").html('');  
+            }
+        });
     }    
 );
 
-/*$(window).on('load', function(){
+$(document).on('click', '.book__event', function (e) {
+    e.preventDefault();
+  var id =  e.target.attributes.id.value;
+  var token = localStorage.getItem('token');
+  console.log('event is', e);
+  e.target.textContent = 'Loading...';
+  $.ajax({ url: `https://vanhackacton.herokuapp.com/api/v1/events/subscribe/${id}`,
+  method: 'GET',
+  headers: {
+    "Authorization": localStorage.getItem('token')
+  },
+  success: function(response) {
+      console.log('success...');
+        alert(`Hello ${response.data.firstname} you have successfully booked the event a mail will be sent to you shortly`);
+        e.target.textContent = 'Booked';
+     },
+     error:function(response) {
+         if(response.status === 401){
+            alert(`Kindly login or sign up`);
+         }
+         if(response.status === 403){
+             alert('you are not a premium user kindly upgrade your plan');
+         }
+
+        e.target.textContent = 'Book event';
+     }
+  });
+});
+
+$(window).on('load', function(){
     $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/details",
     method: 'GET',
     headers: {
       "Authorization": localStorage.getItem('token')
     },
-    sucess: function(response) {
-        alert('authenticated')
+    success: function(response) {
       $("#login-btn").addClass('none');
       $("#signup-btn").addClass('none');
        },
        error:function(response) {
-          alert('auth failed');
           $("#login-btn").removeClass('none');
           $("#signup-btn").removeClass('none');
        }
     });
 });
-
-*/
     

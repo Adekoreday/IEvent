@@ -91,7 +91,7 @@ class Event {
         const event = await Events.findById(id);
         if(event === null) return serverResponse(response, 404, { message: 'event not found'});
         const user = request.user;
-        if(event.isPremium === true && user.isPremium === false) return  serverResponse(response, 401, { message: 'upgrade to premium plan to subscribe to event'});
+        if(event.isPremium === true && user.isPremium === false) return  serverResponse(response, 403, { message: 'upgrade to premium plan to subscribe to event'});
         await user.addEvents(event.id, {through: {isConfirmed: false}});
 
         const message = {
