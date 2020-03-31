@@ -6,6 +6,9 @@
     position: relative;
     
 }
+.none{
+  visibility: hidden !important;
+}
 
 .container__sub{
   height: 60%;
@@ -43,6 +46,10 @@
   display: flex;
   justify-content: space-around;
   padding: 2rem;
+}
+
+.bag{
+  margin: .3rem !important;
 }
 
 .event__list{

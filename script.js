@@ -17,14 +17,16 @@ $("#login-btn").click(function(){
         password: passwordval
     },
      success: function(response){
-        $("#login-btn").remove();
-        $("#signup-btn").remove();
+        $("#login-btn").addClass('none');
+        $("#signup-btn").addClass('none');
          $('#exampleModal').modal('hide');
          alert('login successful');
          localStorage.setItem('token', response.token)
      },
      error:function(response) {
         $('.login_submit').html('submit');
+        $("#login-btn").removeClass('none');
+        $("#signup-btn").removeClass('none');
         alert('wrong user name or password');
      }
   });
@@ -38,10 +40,12 @@ $("#login-btn").click(function(){
   });
 
   $(document).ready(function(){
+      $(".loader").html('Loading....');
     $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/events/readall",
            method: 'GET',
             success: function(response){
                console.log(response);
+               $(".loader").html('');
              Object.keys(response.data).forEach(function(element, i) {
                 var item = document.createElement('div');
                 item.className = 'card';
@@ -60,29 +64,85 @@ $("#login-btn").click(function(){
                 cardTitle.className = 'card-title';
                 cardTitle.innerHTML= response.data[element].name;
 
+                var premium =document.createElement('div');
+                premium.className='badge badge-info bag';
+                premium.innerHTML='premium';
+                if(response.data[element].isPremium) cardTitle.appendChild(premium);
+
                 var location = document.createElement('div');
                 var date =document.createElement('div');
                 
                 location.innerHTML = response.data[element].location;
                 date.innerHTML= new Date(response.data[element].date).toString().slice(0, 15);
                 
-                var button =document.createElement('a');
-                button.className='btn btn-primary';
+                var button =document.createElement('div');
+                button.className='btn btn-primary book__event';
                 button.innerHTML='Book Event';
                 button.style.color='#FFFFFF';
                 button.style.marginTop = '10px';
                 button.id = response.data[element].id;
 
+
                 content.appendChild(cardTitle);
                 content.appendChild(location);    
                 content.appendChild(date);
                 content.appendChild(button);
-                item.appendChild(content);
 
-                
+                item.appendChild(content);                
                 $('.event__list').append(item);
-               });
-            }});
-    });
 
+               });
+            },
+            error:function(response) {
+                $(".loader").html('');  
+            }
+        });
+    }    
+);
+
+$(document).on('click', '.book__event', function (e) {
+    e.preventDefault();
+  var id =  e.target.attributes.id.value;
+  var token = localStorage.getItem('token');
+  console.log('event is', e);
+  e.target.textContent = 'Loading...';
+  $.ajax({ url: `https://vanhackacton.herokuapp.com/api/v1/events/subscribe/${id}`,
+  method: 'GET',
+  headers: {
+    "Authorization": localStorage.getItem('token')
+  },
+  success: function(response) {
+      console.log('success...');
+        alert(`Hello ${response.data.firstname} you have successfully booked the event a mail will be sent to you shortly`);
+        e.target.textContent = 'Booked';
+     },
+     error:function(response) {
+         if(response.status === 401){
+            alert(`Kindly login or sign up`);
+         }
+         if(response.status === 403){
+             alert('you are not a premium user kindly upgrade your plan');
+         }
+
+        e.target.textContent = 'Book event';
+     }
+  });
+});
+
+$(window).on('load', function(){
+    $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/details",
+    method: 'GET',
+    headers: {
+      "Authorization": localStorage.getItem('token')
+    },
+    success: function(response) {
+      $("#login-btn").addClass('none');
+      $("#signup-btn").addClass('none');
+       },
+       error:function(response) {
+          $("#login-btn").removeClass('none');
+          $("#signup-btn").removeClass('none');
+       }
+    });
+});
     
