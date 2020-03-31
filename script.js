@@ -17,14 +17,16 @@ $("#login-btn").click(function(){
         password: passwordval
     },
      success: function(response){
-        $("#login-btn").remove();
-        $("#signup-btn").remove();
+        $("#login-btn").addClass('none');
+        $("#signup-btn").addClass('none');
          $('#exampleModal').modal('hide');
          alert('login successful');
          localStorage.setItem('token', response.token)
      },
      error:function(response) {
         $('.login_submit').html('submit');
+        $("#login-btn").removeClass('none');
+        $("#signup-btn").removeClass('none');
         alert('wrong user name or password');
      }
   });
@@ -77,12 +79,32 @@ $("#login-btn").click(function(){
                 content.appendChild(location);    
                 content.appendChild(date);
                 content.appendChild(button);
-                item.appendChild(content);
-
-                
+                item.appendChild(content);                
                 $('.event__list').append(item);
+
                });
             }});
-    });
+    }    
+);
 
+/*$(window).on('load', function(){
+    $.ajax({ url: "https://vanhackacton.herokuapp.com/api/v1/users/details",
+    method: 'GET',
+    headers: {
+      "Authorization": localStorage.getItem('token')
+    },
+    sucess: function(response) {
+        alert('authenticated')
+      $("#login-btn").addClass('none');
+      $("#signup-btn").addClass('none');
+       },
+       error:function(response) {
+          alert('auth failed');
+          $("#login-btn").removeClass('none');
+          $("#signup-btn").removeClass('none');
+       }
+    });
+});
+
+*/
     
