@@ -74,6 +74,27 @@ class Users {
 
     }
   }
+
+      /**
+   * Method for handling signin route(POST api/v1/auth/login)
+   * @param {object} request - the request object
+   * @param {object} response  - object
+   * @return { json }  - the response json
+   */
+  static async getUser(request, response) {
+    try {
+      const user = request.user;
+     const token = response.locals.token;
+      return serverResponse(response, 200, {
+        user: { ...user.dataValues },
+        token
+      });
+    } catch (error) {
+      console.log('the error', error);
+      return serverError(response);
+
+    }
+  }
 }
 
 export default Users;
