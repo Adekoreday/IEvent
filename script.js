@@ -62,6 +62,11 @@ $("#login-btn").click(function(){
                 cardTitle.className = 'card-title';
                 cardTitle.innerHTML= response.data[element].name;
 
+                var premium =document.createElement('div');
+                premium.className='badge badge-info bag';
+                premium.innerHTML='premium';
+                if(response.data[element].isPremium) cardTitle.appendChild(premium);
+
                 var location = document.createElement('div');
                 var date =document.createElement('div');
                 
@@ -75,10 +80,12 @@ $("#login-btn").click(function(){
                 button.style.marginTop = '10px';
                 button.id = response.data[element].id;
 
+
                 content.appendChild(cardTitle);
                 content.appendChild(location);    
                 content.appendChild(date);
                 content.appendChild(button);
+
                 item.appendChild(content);                
                 $('.event__list').append(item);
 

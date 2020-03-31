@@ -48,6 +48,10 @@
   padding: 2rem;
 }
 
+.bag{
+  margin: .3rem !important;
+}
+
 .event__list{
   margin: 7rem 0;
 display: flex;
