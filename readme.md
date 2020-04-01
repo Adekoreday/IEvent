@@ -1,18 +1,14 @@
 ### IEVENT APP
 
-A REST API BACKEND BUILT WITH NODE.JS, EXPRESS AND SEQUELIZE
+A REST API BACKEND BUILT WITH NODE.JS, EXPRESS AND SEQUELIZE.
 
- That allows users to register for thier event of choice
+ It allows users to register for their event of choice.
 
-
-- User can register for multiple events
-- Only premium users can register for premium events
-- Users can sign In and Sign UP
+- Users can register for multiple events
+- Only `Premium` users can register for `Premium` events
+- Users can `signin` and `signup`
 - Implement social sharing of link to events(pending)
 
-Api docs on Postman collection
+Api docs on Postman collection [POSTMAN](https://documenter.getpostman.com/view/5907608/SzYXXKJZ)
 
-[POSTMAN](https://documenter.getpostman.com/view/5907608/SzYXXKJZ)
-
-by Adeyemi Adekorede
-twitter @AdeyemiAdekore2
+by `Adeyemi Adekorede` Twitter [@AdeyemiAdekore2](https://twitter.com/AdeyemiAdekore2)
