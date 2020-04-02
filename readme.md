@@ -16,6 +16,7 @@ Api docs on Postman collection [POSTMAN](https://documenter.getpostman.com/view/
 
 A sample project utilizing this API
 [EVENT](https://adekoreday.github.io/IEvent/)
+This project can be found in the root folder of this repository
 
 
 by Adeyemi Adekorede
