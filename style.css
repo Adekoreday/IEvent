@@ -48,8 +48,10 @@
   padding: 2rem;
 }
 
+
 .bag{
   margin: .3rem !important;
+  display: block !important;
 }
 
 .event__list{
@@ -75,4 +77,8 @@ flex-wrap: wrap;
 
 .subcategory{
   display: flex;
+}
+
+.book__event{
+  z-index: 100;
 }
