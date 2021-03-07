@@ -49,7 +49,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
  *        description: A successful response
  */
 app.get('/', (request, response) => {
-  response.status(200).send('Welcome to Events app');
+  response.status(200).send('Welcome to YankeePay app');
 });
 
 app.use('/api/v1', routes);
